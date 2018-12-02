@@ -53,7 +53,7 @@ function collisionDetection() {
                     b.status = 0;
                     score++;
                     if(score == brickRowCount*brickColumnCount) {
-                        alert("You won. Now build something original");
+                        alert("You Won. Now play out Veggieman - https://bmoishe.github.io/Veggie-man/");
                         document.location.reload();
                     }
                 }
