@@ -39,9 +39,14 @@ var brickY = (r*(brickHeight+brickPadding))+brickOffsetTop;
 // score counter
 var score = 0;
 
+// Lifes
+var lives = 3;
+
 // Listeners for key presses
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
+
+// Listener for mouse movement
 document.addEventListener("mousemove", mouseMoveHandler, false);
 
 function mouseMoveHandler(e) {
@@ -49,6 +54,12 @@ function mouseMoveHandler(e) {
     if(relativeX > 0 && relativeX < canvas.width) {
         paddleX = relativeX - paddleWidth/2;
     }
+}
+
+function drawLives() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "#0095DD";
+    ctx.fillText("Lives: "+lives, canvas.width-65, 20);
 }
 
 function collisionDetection() {
@@ -141,6 +152,7 @@ function draw() {
   collisionDetection();
   drawPaddle();
   drawScore();
+  drawLives();
   // This ensures if the ball hits the sides then it will reverse the direction.
   if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
     dx = -dx;
@@ -152,8 +164,18 @@ function draw() {
         dy = -dy;
     }
     else {
+      lives--;
+      if(!lives) {
         alert("GAME OVER");
         document.location.reload();
+      }
+      else {
+        x = canvas.width/2;
+        y = canvas.height-30;
+        dx = 2;
+        dy = -2;
+        paddleX = (canvas.width-paddleWidth)/2;
+      }
     }
   }
 // Moves the paddle within the canvas
