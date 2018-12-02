@@ -187,10 +187,10 @@ function draw() {
     }
     x += dx;
     y += dy;
+    requestAnimationFrame(draw);
 }
 
-
-setInterval(draw, 10);
+draw();
 
 
 // red rectangle
